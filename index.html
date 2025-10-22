@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Circles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css?v=2.0">
+</head>
+<body>
+    <!-- 햄버거 메뉴 -->
+    <div class="hamburger-menu">
+        <div class="hamburger-icon" id="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-overlay" id="menu-overlay">
+            <div class="menu-content">
+                <ul class="menu-list">
+                    <li><a href="#home">A Million Bikers</a></li>
+                    <li><a href="#about">work2</a></li>
+                    <li><a href="#gallery">work3</a></li>
+                    <li><a href="#process">work4</a></li>
+                    <li><a href="#contact">work5</a></li>
+                    <li><a href="#portfolio">work6</a></li>
+                    <li><a href="#news">work7</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="shapes-container"></div>
+        <div id="text-container">
+            <h1>A<br>MILLON<br>BIKERS</h1>
+            <p>Illustration Book </p>
+        </div>
+    </div>
+    
+    <!-- 작품 이미지 섹션 -->
+    <div id="artwork-section">
+        <div class="artwork-container">
+            <img src="./images/ground1_compressed.png" alt="Ground 1" class="artwork-image1">
+            
+            <!-- 작품 설명 섹션 -->
+            <div class="description-section">
+                <div class="description-column">
+                    <h2>바이커 대백과</h2>
+                    <p>오토바이는 많은 사람을 끌어당기는 매력이 있는 물건입니다. 그 안에서 우리는 클래식한 낭만부터 거친 자유, 심장이 쿵쾅거리는 스릴부터 시대에 따라 발전하는 기술, 또 수많은 장르와 브랜드, 그리고 그 위에 오르는 사람 등 다양한 요소를 발견할 수 있습니다. 각 요소는 모두 저마다의 이야기와 역사를 가지고 있습니다.</p>
+                    <p>'바이커 대백과'는 그 방대한 오토바이의 세계를 '테트리스 챌린지'라는 신선한 시각으로 재구성한 일러스트 북입니다. 이 책을 통해 오토바이라는 커다란 주제 안에서 사람들이 미처 발견하지 못하고 지나가는 부분들을 짚어가며 그 안에 담긴 이야기를 풀어내고자 했습니다. 단순한 기계가 아닌 인간의 삶에 깊게 녹아든 바이크를 사람들이 공감하기 쉬운 방식으로 새롭게 재조명하는 작품입니다.</p>
+                </div>
+                
+                <div class="description-column">
+                    <h2>A Million Bikers</h2>
+                    <p>Motorcycles are objects with a magnetic appeal that draws many people in. Within them, we can find diverse elements ranging from classic romance to rugged freedom, from heart-pounding thrills to evolving technology over time, countless genres and brands, and the people who ride them. Each element carries its own story and history.</p>
+                    <p>'The Million Bikers' is an illustrated book that reconstructs the huge world of motorcycles through the fresh perspective of a 'Tetris Challenge'. Through this book, I aimed to explore the overlooked aspects within the big theme of motorcycles and unravel the stories contained within. It is a work that reintroduces bikes—not just simple machines, but deeply embedded in human life—in a way that resonates with people.</p>
+                </div>
+            </div>
+            
+            <img src="./images/poster_compressed.jpg" alt="Poster" class="artwork-image1">
+            
+            <!-- 페이지 갤러리 섹션 -->
+            <div class="page-gallery">
+                <div class="page-gallery-container">
+                    <img src="./images/page1.jpg" alt="Page 1" class="page-image">
+                    <img src="./images/page2.jpg" alt="Page 2" class="page-image">
+                    <img src="./images/page3.jpg" alt="Page 3" class="page-image">
+                    <img src="./images/page4.jpg" alt="Page 4" class="page-image">
+                    <img src="./images/page5.jpg" alt="Page 5" class="page-image">
+                    <img src="./images/page6.jpg" alt="Page 6" class="page-image">
+                    <img src="./images/page7.jpg" alt="Page 7" class="page-image">
+                    <img src="./images/page8.jpg" alt="Page 8" class="page-image">
+                    <!-- 무한 스크롤을 위한 복제 -->
+                    <img src="./images/page1.jpg" alt="Page 1" class="page-image">
+                    <img src="./images/page2.jpg" alt="Page 2" class="page-image">
+                    <img src="./images/page3.jpg" alt="Page 3" class="page-image">
+                    <img src="./images/page4.jpg" alt="Page 4" class="page-image">
+                    <img src="./images/page5.jpg" alt="Page 5" class="page-image">
+                    <img src="./images/page6.jpg" alt="Page 6" class="page-image">
+                    <img src="./images/page7.jpg" alt="Page 7" class="page-image">
+                    <img src="./images/page8.jpg" alt="Page 8" class="page-image">
+                </div>
+            </div>
+            
+            <!-- 스티커 섹션 -->
+            <div class="sticker-section">
+                <img src="./images/sticker_compressed.png" alt="Sticker" class="sticker-image">
+            </div>
+            
+            <!-- 목업 섹션 -->
+            <div class="mockup-section">
+                <img src="./images/mockup1_compressed.png" alt="Mockup 1" class="mockup-image">
+                <img src="./images/mockup2_compressed.png" alt="Mockup 2" class="mockup-image">
+            </div>
+            
+            <div class="artwork-full-container">
+                <div class="artwork-info">
+                    <h3>A MILLION BIKERS by HYEON WOO ROH</h3>
+                    <p>© 2025 노현우</p>
+                    <p>All rights reserved.</p>
+                    <p>발행일. 2025. 11. 5.</p>
+                    <p>총 128p.</p>
+                </div>
+                <img src="./images/ground2_compressed.png" alt="Ground 2" class="artwork-image-full">
+            </div>
+        </div>
+    </div>
+    
+    <!-- 네비게이션 화살표 -->
+    <div class="navigation-arrows">
+        <div class="nav-arrow nav-arrow-left">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="nav-arrow nav-arrow-right">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+    
+    <script src="./script.js?v=2.0"></script>
+</body>
+</html>
