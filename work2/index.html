@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work 2</title>
+    <link rel="stylesheet" href="./style.css?v=2.0">
+</head>
+<body>
+    <!-- 로고 -->
+    <div class="logo-container">
+        <img src="./images/logo.png" alt="Logo" class="logo">
+    </div>
+    
+    <!-- Books 이미지 -->
+    <div class="books-container">
+        <img src="./images/books.png" alt="Books" class="books-image">
+    </div>
+    
+    <!-- 이미지 1 -->
+    <div class="image1-container">
+        <img src="./images/image 1.png" alt="Image 1" class="image1">
+    </div>
+    
+    <!-- 통계 텍스트 -->
+    <div class="stats-section">
+        <h2>한국어 화자의 성인 어휘력, 생각보다 낮다.</h2>
+        <div class="stats-content">
+            <h3>[ERI 어휘 등급 평가]</h3>
+            <ul>
+                <li>-평균점수: 15점 만점중 <span class="highlight">9.37점</span> (63%)</li>
+                <li>-응답자 56.6%가 8~11점 구간에 분포</li>
+                <li>-<span class="highlight">20대가 최하위</span>, 심지어 60대보다 낮음</li>
+                <li>-어휘등급(A~D) 올라갈수록 <span class="highlight">급격한 정답률 하락</span></li>
+            </ul>
+            <p class="citation">오은하, 편지윤, 서혁. 2023. "성인의 어휘 능력 조사 결과 분석-어휘 등급과 응답자 수준 비교를 중심으로" 『국어교육연구』 (제83집)</p>
+        </div>
+    </div>
+    
+    <!-- 어휘력 설명 텍스트 -->
+    <div class="vocab-description">
+        <p>어휘력은 사고력, 표현력, 커뮤니케이션 역량의 기초 자산</p>
+        <p class="highlight-text">그러나 기존 어휘 학습의 한계 명확</p>
+    </div>
+    
+    <!-- 3열 컬럼 섹션 -->
+    <div class="three-columns-section">
+        <div class="column-container">
+            <div class="column-box"></div>
+            <div class="column-number">1</div>
+            <div class="column-text">
+                <p>현재 대부분의 어휘 학습은</p>
+                <p>'문제 풀이', '낱말-의미 연결' 중심</p>
+                <p>→ 어휘력 및 표현력을 기르기 어려움</p>
+            </div>
+        </div>
+        <div class="column-container">
+            <div class="column-box"></div>
+            <div class="column-number">2</div>
+            <div class="column-text">
+                <p>성인이 아닌</p>
+                <p>유소년-고등생을 타겟으로 하기 때문에</p>
+                <p>평가를 위한 공부</p>
+            </div>
+        </div>
+        <div class="column-container">
+            <div class="column-box"></div>
+            <div class="column-number">3</div>
+            <div class="column-text">
+                <p>학습자는 "내가 잘하고 있는가?"보다</p>
+                <p>"나는 어느 정도 수준인가?"를</p>
+                <p>알고 싶어함</p>
+            </div>
+        </div>
+        <!-- 모이는 선 SVG -->
+        <svg class="converging-lines" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMin meet">
+            <path class="line line-1" d="M 200 -150 Q 400 50 600 200" stroke="#000" stroke-width="1" fill="none" />
+            <path class="line line-2" d="M 600 -150 Q 600 50 600 200" stroke="#000" stroke-width="1" fill="none" />
+            <path class="line line-3" d="M 1000 -150 Q 800 50 600 200" stroke="#000" stroke-width="1" fill="none" />
+        </svg>
+        <!-- 선 아래 텍스트 -->
+        <div class="converging-text">
+            <h2>성인 개개인 맞춤 수치 기반 피드백 제공 서비스</h2>
+        </div>
+    </div>
+    
+    <!-- 비디오와 텍스트 섹션 -->
+    <div class="content-section">
+        <div class="main-video-container">
+            <video class="main-video" muted playsinline>
+                <source src="./charts.mov" type="video/mp4">
+            </video>
+        </div>
+        <div class="image-content">
+            <img src="./images/graph.png" alt="Graph" class="graph-image">
+        </div>
+    </div>
+    
+    <!-- 기대효과 섹션 -->
+    <div class="expectation-section">
+        <div class="expectation-titles">
+            <h2 class="expectation-title">
+                <span class="title-connector"></span>
+                기대효과
+            </h2>
+            <h2 class="spectrum-title">더 넓어지는 학습자의 표현 스펙트럼</h2>
+        </div>
+        <div class="expectation-columns">
+            <svg class="connection-lines" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                <!-- 선은 JavaScript로 동적으로 생성됩니다 -->
+            </svg>
+            <div class="expectation-column-left">
+                <ul class="expectation-list">
+                    <li class="list-item" data-line="1">
+                        <span class="expectation-subtitle">정량 피드백 기반 자기 위치 인식</span>
+                        <p>-추상적이던 '표현력'을 점수와 등급으로 수치화</p>
+                    </li>
+                    <li class="list-item" data-line="2">
+                        <span class="expectation-subtitle">비교로 자극하는 동기</span>
+                        <p>-학습 동기 유발 → 반복 사용 → 성장 추적</p>
+                    </li>
+                    <li class="list-item" data-line="3">
+                        <span class="expectation-subtitle">비판이 아닌 성장 유도</span>
+                        <p>-리라이팅 제안과 비교 제공 → 자연스러운 반복 학습</p>
+                    </li>
+                    <li class="list-item" data-line="4">
+                        <span class="expectation-subtitle">현실에 맞춘 피드백</span>
+                        <p>-어휘만 보는 것이 아니라 실제 쓰는 글을 분석</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="expectation-column-right">
+                <div class="spectrum-content">
+                    <p>블로그 글쓰기, 자기소개서, 리포트, 이메일, 왓챠피디아 등</p>
+                    <p>일상생활 속 다양한 글쓰기에 적용할 수 있다.</p>
+                </div>
+                <div class="spectrum-image">
+                    <img src="./images/bellcurve.png" alt="Bell Curve" class="bellcurve-image">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Webmain 이미지 -->
+    <div class="webmain-container">
+        <img src="./images/webmain.png" alt="Webmain" class="webmain-image">
+    </div>
+    
+    <!-- Mainpage Video Section -->
+    <div class="mainpage-video-section">
+        <div class="mainpage-video-container">
+            <video class="mainpage-video" muted playsinline controls>
+                <source src="./mainpage_video.mov" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Video Description -->
+        <div class="video-description">
+            <p>성취가 쌓일수록 책이 하나씩 '쌓이는' 인터랙션을 통해 학습 과정이 시각적으로 드러나게 하였다. 핵심 비주얼 키워드는 책과 쌓임이며, 사용자는 자신의 어휘적 성장을 '쌓아가는' 경험으로 체감하게 된다.</p>
+        </div>
+    </div>
+    
+    <script src="./script.js?v=2.0"></script>
+</body>
+</html>

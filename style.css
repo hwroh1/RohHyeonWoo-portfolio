@@ -1,0 +1,276 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: transparent;
+    min-height: calc(100vh + 50vh); /* 썸네일 섹션을 위한 공간 추가 */
+    overflow-y: auto;
+    user-select: none;
+    position: relative;
+}
+
+
+/* 가챠 컨테이너 */
+.gacha-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* Canvas 구체 */
+.sphere {
+    position: absolute;
+    cursor: pointer;
+}
+
+/* 바닥선 */
+.floor-line {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #000000;
+    z-index: 25;
+    pointer-events: none;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* 왼쪽 위 텍스트 */
+.welcome-text {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 12pt;
+    color: #000000;
+    z-index: 20;
+    font-family: 'Arial', sans-serif;
+}
+
+/* 왼쪽 위 이미지 */
+.asset-image {
+    position: fixed;
+    top: 50px;
+    left: 20px;
+    z-index: 1;
+    max-width: 1000px;
+    width: 60vw;
+    height: auto;
+}
+
+/* 오른쪽 아래 이미지 */
+.asset-image-2 {
+    position: fixed;
+    bottom: -100px;
+    right: 20px;
+    z-index: 30;
+    max-width: 500px;
+    width: auto;
+    height: auto;
+}
+
+/* 오른쪽 위 이름 및 직업 */
+.name-text {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 12pt;
+    color: #000000;
+    z-index: 20;
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    line-height: 1.5;
+}
+
+/* 클릭 안내 텍스트 */
+.click-hint {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #000000;
+    font-size: 1.2rem;
+    z-index: 20;
+    animation: pulse 2s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* 하단 텍스트 */
+.bottom-text {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 24%;
+    min-height: 15vh;
+    padding: 20px;
+    padding-left: 20px;
+    margin-top: 150vh;
+    color: #000000;
+    font-size: 12pt;
+    line-height: 1.6;
+    z-index: 35;
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    background: #ffffff;
+}
+
+/* 하단 텍스트 2 */
+.bottom-text-2 {
+    position: sticky;
+    top: 0;
+    left: calc(24% + 10px);
+    width: 24%;
+    min-height: 25vh;
+    padding: 20px;
+    padding-left: 20px;
+    margin-top: 0vh;
+    color: #000000;
+    font-size: 12pt;
+    line-height: 1.6;
+    z-index: 35;
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    background: #ffffff;
+}
+
+/* 하단 텍스트 3 */
+.bottom-text-3 {
+    position: sticky;
+    top: 0;
+    left: calc(48% + 20px);
+    width: 24%;
+    min-height: 25vh;
+    padding: 20px;
+    padding-left: 20px;
+    margin-top: 30vh;
+    color: #000000;
+    font-size: 12pt;
+    line-height: 1.6;
+    z-index: 35; /* work-thumbnail (z-index: 40)보다 아래 - 먼저 올라와서 나중에 썸네일이 가림 */
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    background: #ffffff;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* 작품 썸네일 섹션 */
+.work-thumbnails {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.work-thumbnails.active {
+    display: block;
+}
+
+.work-thumbnail {
+    position: sticky;
+    width: 24%;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 2px solid #000000;
+    background-color: #cccccc; /* 회색 박스 */
+    z-index: 40;
+}
+
+/* 첫 번째 줄: work1, work2, work3, work4 */
+.work-thumbnail[data-work="1"] {
+    left: 0;
+    top: 0;
+    margin-top: 60vh;
+}
+
+.work-thumbnail[data-work="2"] {
+    left: calc(24% + 10px);
+    top: 0;
+    margin-top: 60vh;
+}
+
+.work-thumbnail[data-work="3"] {
+    left: calc(48% + 20px);
+    top: 0;
+    margin-top: 60vh;
+}
+
+.work-thumbnail[data-work="4"] {
+    left: calc(72% + 30px);
+    top: 0;
+    margin-top: 60vh;
+}
+
+/* 두 번째 줄: work5, work6, work7 */
+.work-thumbnail[data-work="5"] {
+    left: 0;
+    top: 0;
+    margin-top: calc(60vh + 35vh);
+}
+
+.work-thumbnail[data-work="6"] {
+    left: calc(24% + 10px);
+    top: 0;
+    margin-top: calc(60vh + 35vh);
+}
+
+.work-thumbnail[data-work="7"] {
+    left: calc(48% + 20px);
+    top: 0;
+    margin-top: calc(60vh + 35vh);
+}
+
+/* 호버 효과 제거 */
+
+.work-thumbnail a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.work-title {
+    font-size: 14pt;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    color: #000000;
+    transition: color 0.3s ease;
+}
+
+.work-thumbnail:hover .work-title {
+    color: #333333;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .click-hint {
+        font-size: 1rem;
+        bottom: 30px;
+    }
+}
