@@ -283,7 +283,8 @@ body {
     width: 100%;
     max-width: 1200px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    margin-bottom: 100px;
 }
 
 .video-description p {
@@ -293,7 +294,75 @@ body {
     color: #000;
     font-family: 'Pretendard', sans-serif;
     margin: 0;
-    text-align: left;
+    text-align: center;
+}
+
+/* Link Section */
+.link-section {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 80px auto 100px auto;
+    padding: 0 250px;
+}
+
+.link-section .favicon-image {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.link-section .project-link {
+    font-size: 16px;
+    color: #0066cc;
+    text-decoration: underline;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.link-section .project-link:hover {
+    color: #0052a3;
+}
+
+/* Brand Image Container */
+.brand-container {
+    width: 100%;
+    padding: 80px 0;
+    margin: 0;
+}
+
+.brand-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Mockup 1 Image Container */
+.mockup1-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.mockup1-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Mockup 2 Image Container */
+.mockup2-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.mockup2-image {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* 메인 비디오 컨테이너 */
