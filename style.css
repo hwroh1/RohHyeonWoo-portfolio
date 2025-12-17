@@ -96,7 +96,7 @@ body {
 /* WORKS 텍스트 */
 .works-text {
     position: fixed;
-    top: 350px;
+    top: 320px;
     right: calc(5px + 200px); /* name-text 너비만큼 왼쪽으로 */
     font-size: 48pt;
     font-weight: regular;
@@ -151,7 +151,7 @@ body {
 /* 하단 텍스트 2 */
 .bottom-text-2 {
     position: fixed;
-    top: 240px;
+    top: 190px;
     right: 20px;
     width: 400px;
     color: #000000;
