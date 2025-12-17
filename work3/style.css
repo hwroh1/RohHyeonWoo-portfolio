@@ -1,0 +1,434 @@
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* 커서 힌트 텍스트 */
+.cursor-hint {
+    position: fixed;
+    pointer-events: none;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: sans-serif;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.content-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* About 섹션 */
+.about-section {
+    width: 100%;
+    max-width: 1920px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.about-text {
+    width: 800px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #000;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+/* Top 이미지 */
+.top-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.top-image img {
+    width: 10%;
+    height: auto;
+    display: block;
+}
+
+/* End 이미지 */
+.end-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.end-image img {
+    width: 12%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+}
+
+/* 이미지 그리드 */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 30px;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.grid-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    overflow: hidden;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.modal-image-container {
+    position: relative;
+    width: 70%;
+    max-width: 700px;
+    transform: translateX(10%);
+}
+
+.modal-main-image {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.modal-main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.modal-sub-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.modal-sub-images img {
+    position: absolute;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    cursor: move;
+    pointer-events: all;
+    user-select: none;
+    transition: transform 0.1s ease;
+}
+
+.modal-sub-images img.dragging {
+    opacity: 0.8;
+    z-index: 1000;
+}
+
+.modal-right {
+    position: fixed;
+    right: 10%;
+    top: 10.7%;
+    width: 30%;
+    max-width: 380px;
+    height: auto;
+    z-index: 2001;
+}
+
+.modal-text {
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #000;
+    background: #ffffff;
+    padding: 20px;
+    font-family: sans-serif;
+    font-weight: 600;
+    text-align: left;
+    white-space: pre-line;
+    text-indent: 20px;
+}
+
+.modal-expanded {
+    width: 100%;
+    background: #ffffff;
+    padding: 0 20px 20px 20px;
+    margin-top: 0;
+}
+
+.expanded-content {
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #000;
+    font-family: sans-serif;
+    font-weight: 600;
+    text-align: left;
+    white-space: pre-line;
+    text-indent: 20px;
+}
+
+.expand-button {
+    width: 100%;
+    background: #ffffff;
+    border: none;
+    border-top: 1px solid #ddd;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #000;
+    transition: all 0.3s ease;
+    margin-top: 0;
+}
+
+.expand-button:hover {
+    background: #f5f5f5;
+}
+
+.expand-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.expand-button.expanded .expand-arrow {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0;
+    }
+    
+    .modal-content {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .modal-image-container {
+        width: 90%;
+        transform: translateX(0);
+    }
+    
+    .modal-right {
+        position: relative;
+        right: auto;
+        width: 90%;
+    }
+}
+
+/* 화면 꽉찬 이미지 */
+.fullscreen-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.fullscreen-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* 패딩이 있는 이미지 */
+.padded-image {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5%;
+    position: relative;
+}
+
+.padded-image img {
+    width: 50%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+}
+
+/* 홈으로 돌아가기 버튼 */
+.home-button {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+    background-color: #000000;
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover .home-icon {
+    stroke: #ffffff;
+}
+
+.home-icon {
+    width: 28px;
+    height: 28px;
+    stroke: #000000;
+    transition: stroke 0.3s ease;
+}
+
+/* 네비게이션 버튼 컨테이너 */
+.nav-buttons {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1000;
+}
+
+/* 네비게이션 버튼 (이전/다음) */
+.nav-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: none;
+}
+
+/* 플레이스홀더 버튼 (첫/마지막 페이지에서 홈 버튼 중앙 정렬용) */
+.nav-placeholder {
+    pointer-events: none;
+    cursor: default;
+}
+
+.nav-button:hover {
+    transform: scale(1.1);
+}
+
+.nav-arrow {
+    font-size: 32px;
+    color: #000000;
+    line-height: 1;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.nav-buttons:hover .nav-arrow {
+    opacity: 1;
+}
+
+.nav-button:hover .nav-arrow {
+    color: #000000;
+}
+
+/* 홈 버튼 위치 조정 (nav-buttons 내부에서) */
+.nav-buttons .home-button {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+}
+
+.nav-buttons .home-button:hover {
+    transform: scale(1.1);
+}
+

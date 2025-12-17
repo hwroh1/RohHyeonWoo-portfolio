@@ -1,0 +1,393 @@
+/* Pretendard 폰트 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Pretendard', sans-serif;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Webmain 이미지 컨테이너 */
+.webmain-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.webmain-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 40px;
+}
+
+/* Mainpage Video Section */
+.mainpage-video-section {
+    width: 100%;
+    padding: 40px 100px 0 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainpage-video-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.mainpage-video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Link Section */
+.link-section {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 80px auto 40px auto;
+    padding: 0 250px;
+}
+
+.link-section .favicon-image {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.link-section .project-link {
+    font-size: 16px;
+    color: #0066cc;
+    text-decoration: underline;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.link-section .project-link:hover {
+    color: #0052a3;
+}
+
+/* Brand Image Container */
+.brand-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.brand-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Mockup 1 Image Container */
+.mockup1-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.mockup1-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Sticker GIF Container */
+.sticker-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.sticker-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Mockup 2 Image Container */
+.mockup2-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.mockup2-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 로고 컨테이너 */
+.logo-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.logo {
+    width: 100%;
+    max-width: 1800px;
+    height: auto;
+}
+
+/* Introduce 이미지 */
+.introduce-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.introduce-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Effects 이미지와 Charts 비디오 컨테이너 */
+.effects-charts-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0;
+}
+
+.effects-container {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.effects-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.charts-video-container {
+    flex: 0 0 40%;
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.charts-video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: 15%;
+}
+
+/* 홈으로 돌아가기 버튼 */
+.home-button {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+    background-color: #000000;
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover .home-icon {
+    stroke: #ffffff;
+}
+
+.home-icon {
+    width: 28px;
+    height: 28px;
+    stroke: #000000;
+    transition: stroke 0.3s ease;
+}
+
+/* 네비게이션 버튼 컨테이너 */
+.nav-buttons {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1000;
+}
+
+/* 네비게이션 버튼 (이전/다음) */
+.nav-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: none;
+}
+
+/* 플레이스홀더 버튼 (첫/마지막 페이지에서 홈 버튼 중앙 정렬용) */
+.nav-placeholder {
+    pointer-events: none;
+    cursor: default;
+}
+
+.nav-button:hover {
+    transform: scale(1.1);
+}
+
+.nav-arrow {
+    font-size: 32px;
+    color: #000000;
+    line-height: 1;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.nav-buttons:hover .nav-arrow {
+    opacity: 1;
+}
+
+.nav-button:hover .nav-arrow {
+    color: #000000;
+}
+
+/* 홈 버튼 위치 조정 (nav-buttons 내부에서) */
+.nav-buttons .home-button {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+}
+
+.nav-buttons .home-button:hover {
+    transform: scale(1.1);
+}
+

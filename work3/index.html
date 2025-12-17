@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- 커서 힌트 -->
+    <div class="cursor-hint" id="cursorHint">Click and Drag</div>
+    
+    <!-- 작품 컨텐츠 -->
+    <div class="content-container">
+        <!-- About 섹션 -->
+        <div class="about-section">
+            <h2 class="about-title">About ME.</h2>
+            <p class="about-text">일상 속 사소한 소비 활동은 자기 자신이 어떤 사람인지를 솔직하게 드러내는 특별하고 고유한 언어다.<br>이 프로젝트는 2023년 가을부터 겨울까지의 소비 내역을 시각화하여, 영수증 너머에 '나'라는 사람을 소개하는 기록이다.</p>
+        </div>
+        
+        <!-- Top 이미지 -->
+        <div class="top-image">
+            <img src="./images/top.png" alt="Top">
+        </div>
+        
+        <!-- 이미지 그리드 -->
+        <div class="image-grid" id="imageGrid">
+            <!-- 이미지들은 JavaScript에서 동적으로 생성됩니다 -->
+        </div>
+        
+        <!-- End 이미지 -->
+        <div class="end-image">
+            <img src="./images/end.png" alt="End">
+        </div>
+        
+        <!-- 확대 모달 -->
+        <div class="modal" id="imageModal">
+            <div class="modal-content">
+                <div class="modal-image-container">
+                    <div class="modal-main-image">
+                        <img id="modalMainImage" src="" alt="Main Image">
+                    </div>
+                    <div class="modal-sub-images" id="modalSubImages">
+                        <!-- 서브 이미지들이 여기에 추가됩니다 -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-right">
+                <div class="modal-text" id="modalText">
+                    <!-- 텍스트가 여기에 추가됩니다 -->
+                </div>
+                <div class="modal-expanded" id="modalExpanded" style="display: none;">
+                    <div class="expanded-content" id="expandedContent">
+                        <!-- 접힌 내용이 여기에 추가됩니다 -->
+                    </div>
+                </div>
+                <button class="expand-button" id="expandButton" style="display: none;">
+                    <span class="expand-arrow">▼</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 네비게이션 버튼 -->
+    <div class="nav-buttons">
+        <a href="../work2/index.html" class="nav-button nav-prev">
+            <span class="nav-arrow"><</span>
+        </a>
+        <a href="../index.html" class="home-button" id="homeButton">
+            <svg class="home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"></path>
+            </svg>
+        </a>
+        <a href="../work4/index.html" class="nav-button nav-next">
+            <span class="nav-arrow">></span>
+        </a>
+    </div>
+    
+    <script src="./script.js"></script>
+</body>
+</html>
+
+

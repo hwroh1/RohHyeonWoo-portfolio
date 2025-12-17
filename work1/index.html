@@ -10,57 +10,31 @@
     <link rel="stylesheet" href="./style.css?v=2.0">
 </head>
 <body>
-    <!-- 햄버거 메뉴 -->
-    <div class="hamburger-menu">
-        <div class="hamburger-icon" id="hamburger-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="menu-overlay" id="menu-overlay">
-            <div class="menu-content">
-                <ul class="menu-list">
-                    <li><a href="#home">A Million Bikers</a></li>
-                    <li><a href="#about">work2</a></li>
-                    <li><a href="#gallery">work3</a></li>
-                    <li><a href="#process">work4</a></li>
-                    <li><a href="#contact">work5</a></li>
-                    <li><a href="#portfolio">work6</a></li>
-                    <li><a href="#news">work7</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <div id="shapes-container"></div>
         <div id="text-container">
             <h1>A<br>MILLION<br>BIKERS</h1>
             <p>Illustration Book </p>
         </div>
+        <!-- 커서를 따라다니는 텍스트 -->
+        <div id="cursor-text" class="cursor-follow-text"></div>
     </div>
     
     <!-- 작품 이미지 섹션 -->
     <div id="artwork-section">
         <div class="artwork-container">
-            <img src="./images/ground1_compressed.png" alt="Ground 1" class="artwork-image1">
+            <img src="./images/poster_compressed.jpg" alt="Poster" class="artwork-image1 poster-image">
             
             <!-- 작품 설명 섹션 -->
             <div class="description-section">
                 <div class="description-column">
                     <h2>바이커 대백과</h2>
-                    <p>오토바이는 많은 사람을 끌어당기는 매력이 있는 물건입니다. 그 안에서 우리는 클래식한 낭만부터 거친 자유, 심장이 쿵쾅거리는 스릴부터 시대에 따라 발전하는 기술, 또 수많은 장르와 브랜드, 그리고 그 위에 오르는 사람 등 다양한 요소를 발견할 수 있습니다. 각 요소는 모두 저마다의 이야기와 역사를 가지고 있습니다.</p>
-                    <p>'바이커 대백과'는 그 방대한 오토바이의 세계를 '테트리스 챌린지'라는 신선한 시각으로 재구성한 일러스트 북입니다. 이 책을 통해 오토바이라는 커다란 주제 안에서 사람들이 미처 발견하지 못하고 지나가는 부분들을 짚어가며 그 안에 담긴 이야기를 풀어내고자 했습니다. 단순한 기계가 아닌 인간의 삶에 깊게 녹아든 바이크를 사람들이 공감하기 쉬운 방식으로 새롭게 재조명하는 작품입니다.</p>
-                </div>
-                
-                <div class="description-column">
-                    <h2>A Million Bikers</h2>
-                    <p>Motorcycles are objects with a magnetic appeal that draws many people in. Within them, we can find diverse elements ranging from classic romance to rugged freedom, from heart-pounding thrills to evolving technology over time, countless genres and brands, and the people who ride them. Each element carries its own story and history.</p>
-                    <p>'The Million Bikers' is an illustrated book that reconstructs the huge world of motorcycles through the fresh perspective of a 'Tetris Challenge'. Through this book, I aimed to explore the overlooked aspects within the big theme of motorcycles and unravel the stories contained within. It is a work that reintroduces bikes—not just simple machines, but deeply embedded in human life—in a way that resonates with people.</p>
+                    <p>오토바이는 많은 사람을 끌어당기는 매력이 있는 물건입니다. 그 안에서 우리는 클래식한 낭만부터 거친 자유, 심장이 쿵쾅거리는 스릴부터 시대에 따라 발전하는 기술, 또 수많은 장르와 브랜드, 그리고 그 위에 오르는 사람 등 다양한 요소를 발견할 수 있습니다. 각 요소는 모두 저마다의 이야기와 역사를 가지고 있습니다. 
+                        '바이커 대백과'는 그 방대한 오토바이의 세계를 '테트리스 챌린지'라는 신선한 시각으로 재구성한 일러스트 북입니다. 이 책을 통해 오토바이라는 커다란 주제 안에서 사람들이 미처 발견하지 못하고 지나가는 부분들을 짚어가며 그 안에 담긴 이야기를 풀어내고자 했습니다. 단순한 기계가 아닌 인간의 삶에 깊게 녹아든 바이크를 사람들이 공감하기 쉬운 방식으로 새롭게 재조명하는 작품입니다.</p>
                 </div>
             </div>
             
-            <img src="./images/poster_compressed.jpg" alt="Poster" class="artwork-image1">
+            <img src="./images/ground1_compressed.png" alt="Ground 1" class="artwork-image1">
             
             <!-- 페이지 갤러리 섹션 -->
             <div class="page-gallery">
@@ -85,15 +59,9 @@
                 </div>
             </div>
             
-            <!-- 스티커 섹션 -->
-            <div class="sticker-section">
-                <img src="./images/sticker_compressed.png" alt="Sticker" class="sticker-image">
-            </div>
-            
             <!-- 목업 섹션 -->
             <div class="mockup-section">
-                <img src="./images/mockup1_compressed.png" alt="Mockup 1" class="mockup-image">
-                <img src="./images/mockup2_compressed.png" alt="Mockup 2" class="mockup-image">
+                <img src="./images/mockup.png" alt="Mockup" class="mockup-image">
             </div>
             
             <div class="artwork-full-container">
@@ -109,18 +77,17 @@
         </div>
     </div>
     
-    <!-- 네비게이션 화살표 -->
-    <div class="navigation-arrows">
-        <div class="nav-arrow nav-arrow-left">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-        <div class="nav-arrow nav-arrow-right">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
+    <!-- 네비게이션 버튼 -->
+    <div class="nav-buttons">
+        <div class="nav-button nav-placeholder"></div>
+    <a href="../index.html" class="home-button" id="homeButton">
+        <svg class="home-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"></path>
+        </svg>
+    </a>
+        <a href="../work2/index.html" class="nav-button nav-next">
+            <span class="nav-arrow">></span>
+        </a>
     </div>
     
     <script src="./script.js?v=2.0"></script>

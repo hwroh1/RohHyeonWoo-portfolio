@@ -94,10 +94,40 @@ function getRandomScale() {
 let mouseX = 0;
 let mouseY = 0;
 
+// 커서를 따라다니는 텍스트 요소
+const cursorText = document.getElementById('cursor-text');
+
+// 커서 텍스트 문구 설정 (원하는 문구로 변경 가능)
+const cursorTextContent = "move";
+
 // 마우스 움직임 이벤트
 document.addEventListener('mousemove', function(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
+    
+    // artwork-section이 보이는지 확인
+    const artworkSection = document.getElementById('artwork-section');
+    let shouldShowCursorText = true;
+    
+    if (artworkSection) {
+        const rect = artworkSection.getBoundingClientRect();
+        // artwork-section이 화면 상단에 도달하면 커서 텍스트 숨기기
+        if (rect.top <= window.innerHeight * 0.5) {
+            shouldShowCursorText = false;
+        }
+    }
+    
+    // 커서 텍스트 위치 업데이트
+    if (cursorText) {
+        if (shouldShowCursorText) {
+            cursorText.style.left = mouseX + 'px';
+            cursorText.style.top = mouseY + 'px';
+            cursorText.textContent = cursorTextContent;
+            cursorText.classList.add('visible');
+        } else {
+            cursorText.classList.remove('visible');
+        }
+    }
     
     // 모든 이미지에 대해 마우스와의 거리 확인
     const imageContainers = document.querySelectorAll('.image-container');
@@ -234,26 +264,22 @@ function setupPageGallery() {
     }
 }
 
-// 햄버거 메뉴 제어
-function setupHamburgerMenu() {
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const menuOverlay = document.getElementById('menu-overlay');
-    
-    if (hamburgerMenu && menuOverlay) {
-        // 호버 시 메뉴 열기
-        hamburgerMenu.addEventListener('mouseenter', function() {
-            menuOverlay.classList.add('active');
-        });
-        
-        // 메뉴에서 마우스가 벗어나면 닫기
-        hamburgerMenu.addEventListener('mouseleave', function() {
-            menuOverlay.classList.remove('active');
-        });
-        
-        // 메뉴 오버레이에서 마우스가 벗어나면 닫기
-        menuOverlay.addEventListener('mouseleave', function() {
-            menuOverlay.classList.remove('active');
-        });
+// 커서 텍스트 표시 여부 확인 함수
+function checkCursorTextVisibility() {
+    const artworkSection = document.getElementById('artwork-section');
+    if (cursorText && artworkSection) {
+        const rect = artworkSection.getBoundingClientRect();
+        // artwork-section이 화면 상단에 도달하면 커서 텍스트 숨기기
+        if (rect.top <= window.innerHeight * 0.5) {
+            cursorText.classList.remove('visible');
+        } else {
+            // 마우스 위치로 다시 표시
+            if (mouseX !== 0 || mouseY !== 0) {
+                cursorText.style.left = mouseX + 'px';
+                cursorText.style.top = mouseY + 'px';
+                cursorText.classList.add('visible');
+            }
+        }
     }
 }
 
@@ -261,8 +287,15 @@ function setupHamburgerMenu() {
 document.addEventListener('DOMContentLoaded', function() {
     initializeImages();
     setupPageGallery();
-    setupHamburgerMenu();
     window.addEventListener('resize', handleResize);
+    
+    // 스크롤 이벤트 추가
+    window.addEventListener('scroll', checkCursorTextVisibility);
+    
+    // 커서 텍스트 초기화 (말풍선 스타일)
+    if (cursorText) {
+        cursorText.textContent = cursorTextContent;
+    }
     
     // 방문 기록 저장 (work1 방문 확인)
     const viewedWorks = JSON.parse(localStorage.getItem('viewedWorks') || '[]');

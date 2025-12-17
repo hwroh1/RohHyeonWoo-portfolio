@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PORTFOLIO - 가챠</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,75 +19,82 @@
     <!-- 오른쪽 아래 이미지 -->
     <img src="Asset 2.png" alt="Asset 2" class="asset-image-2">
     
+    <!-- WORKS 텍스트 -->
+    <div class="works-text" id="worksText">→WORKS</div>
+    
     <!-- 오른쪽 위 이름 및 직업 -->
     <div class="name-text">
         Hyeonwoo Roh<br>
         Graphic Designer / Illustrator
+        <br><br>노현우<br><br>+82 10-4548-1054<br>woobbi00@gmail.com
+    </div>
+    
+    <!-- 하단 텍스트 2 -->
+    <div class="bottom-text-2">
+        저는 깊게 생각하고 차근차근 풀어나가는 디자인을 하고 있습니다. 빠른 작업보다 중요한 것은 바른 방향입니다. 저는 문제를 깊이 파고들고 정의하는 시간에 집중합니다. 충분한 고민의 시간이 단단하고 설득력 있는 결과물을 만든다고 믿습니다.
     </div>
     
     <!-- 떨어지는 구체 컨테이너 -->
     <div class="gacha-container">
-        <canvas class="sphere" id="gachaSphere"></canvas>
+        <!-- 구체들은 JavaScript에서 동적으로 생성됩니다 -->
     </div>
     
     <!-- 바닥선 -->
     <div class="floor-line" id="floorLine"></div>
 
     <!-- 클릭 안내 텍스트 -->
-    <div class="click-hint">Get a gashapon</div>
+    <div class="click-hint">Get a Gashapon</div>
     
-    <!-- 하단 텍스트 -->
-    <div class="bottom-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-    
-    <!-- 하단 텍스트 2 -->
-    <div class="bottom-text-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-    
-    <!-- 하단 텍스트 3 -->
-    <div class="bottom-text-3">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
 
     <!-- 작품 썸네일 섹션 (work1~7 모두 본 후 활성화) -->
     <div class="work-thumbnails active" id="workThumbnails">
         <div class="work-thumbnail" data-work="1">
             <a href="work1/index.html">
-                <div class="work-title">Work 1</div>
+                <img src="thumbnail_image/work1.jpg" alt="Work 1" class="thumbnail-img">
+                <div class="work-overlay"></div>
+                <div class="work-genre">Illustration</div>
             </a>
         </div>
         <div class="work-thumbnail" data-work="2">
             <a href="work2/index.html">
-                <div class="work-title">Work 2</div>
+                <img src="thumbnail_image/work2.jpg" alt="Work 2" class="thumbnail-img">
+                <div class="work-overlay"></div>
+                <div class="work-genre">Typography</div>
             </a>
         </div>
         <div class="work-thumbnail" data-work="3">
             <a href="work3/index.html">
-                <div class="work-title">Work 3</div>
+                <img src="thumbnail_image/work3.jpg" alt="Work 3" class="thumbnail-img">
+                <div class="work-overlay"></div>
+                <div class="work-genre">Illustration</div>
             </a>
         </div>
         <div class="work-thumbnail" data-work="4">
             <a href="work4/index.html">
-                <div class="work-title">Work 4</div>
+                <img src="thumbnail_image/work4.jpg" alt="Work 4" class="thumbnail-img">
+                <div class="work-overlay"></div>
+                <div class="work-genre-container">
+                    <div class="work-genre">BX</div>
+                    <div class="work-genre">Web design</div>
+                </div>
             </a>
         </div>
         <div class="work-thumbnail" data-work="5">
             <a href="work5/index.html">
-                <div class="work-title">Work 5</div>
-            </a>
-                </div>
-        <div class="work-thumbnail" data-work="6">
-            <a href="work6/index.html">
-                <div class="work-title">Work 6</div>
-            </a>
-            </div>
-        <div class="work-thumbnail" data-work="7">
-            <a href="work7/index.html">
-                <div class="work-title">Work 7</div>
+                <img src="thumbnail_image/work5.jpg" alt="Work 5" class="thumbnail-img">
+                <div class="work-overlay"></div>
+                <div class="work-genre">Illustration</div>
             </a>
         </div>
+        <div class="work-thumbnail" data-work="6">
+            <a href="work6/index.html">
+                <img src="thumbnail_image/work6.jpg" alt="Work 6" class="thumbnail-img">
+                <div class="work-overlay"></div>
+                <div class="work-genre">Illustration</div>
+            </a>
+        </div>
+        <!-- sticky가 제대로 작동하도록 추가 공간 -->
+        <div style="height: 100vh; width: 100%;"></div>
     </div>
 
     <script src="script.js"></script>

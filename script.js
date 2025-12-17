@@ -1,54 +1,30 @@
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('gachaSphere');
     const container = document.querySelector('.gacha-container');
     const floorLine = document.getElementById('floorLine');
     
-    if (!canvas || !container) return;
+    if (!container) return;
     
-    const ctx = canvas.getContext('2d');
+    // 기존 canvas 제거 (동적으로 생성할 것이므로)
+    const existingCanvas = document.getElementById('gachaSphere');
+    if (existingCanvas) {
+        existingCanvas.remove();
+    }
+    
     const sphereSize = 400;
     const radius = sphereSize / 2;
+    const numSpheres = 3; // 구체 개수
     
     // 바닥선 위치 설정 함수
     function updateFloorLine() {
         if (floorLine) {
-            // 구체가 실제로 충돌하는 바닥 높이에 맞춰서 설정
-            // 충돌 조건: y + radius >= floorHeight
-            // 충돌 시: y = floorHeight - radius
-            // canvas.style.top = y - radius = (floorHeight - radius) - radius = floorHeight - 2*radius
-            // canvas의 하단 = canvas.style.top + sphereSize = (floorHeight - 2*radius) + 2*radius = floorHeight
-            // 하지만 실제로는 canvas의 하단이 구체의 바닥이므로, 바닥선은 floorHeight에 맞춰야 함
-            // 사용자가 너무 아래라고 하니, 구체가 보이는 바닥 부분에 맞춤
             const floorHeight = window.innerHeight + 8;
-            // 구체의 중심이 충돌 위치에 있을 때의 canvas 하단 위치
-            // 충돌 시 y = floorHeight - radius
-            // canvas.style.top = y - radius = floorHeight - 2*radius
-            // canvas의 하단 = canvas.style.top + sphereSize = floorHeight - 2*radius + 2*radius = floorHeight
-            // 하지만 실제로는 구체가 보이는 바닥 부분이 약간 위에 있을 수 있으므로 조정
-            // 스크롤과 함께 움직이지 않도록 실제 바닥 높이에 맞춤
             floorLine.style.top = `${floorHeight - 60}px`;
-            console.log('바닥선 위치:', floorHeight - 60, '실제 바닥:', floorHeight, '구체 반지름:', radius);
         }
     }
     
     // 초기 바닥선 위치 설정
     updateFloorLine();
-    
-    // Canvas 크기 설정
-    canvas.width = sphereSize;
-    canvas.height = sphereSize;
-    canvas.style.width = `${sphereSize}px`;
-    canvas.style.height = `${sphereSize}px`;
-        
-    // 물리 시뮬레이션 변수
-    let x = window.innerWidth * 0.60; // 많이 오른쪽으로
-    let y = -100; // 더 위에서부터 시작
-    let vx = (Math.random() - 0.5) * 2;
-    let vy = 0;
-        let rotationX = 0;
-        let rotationY = 0;
-    let rotationZ = 0;
     
     // 물리 상수
     const gravity = 0.5;
@@ -89,230 +65,254 @@ document.addEventListener('DOMContentLoaded', function() {
         return { x, y, z };
     }
     
-    // 구체 그리기 함수
-    function drawSphere() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 2;
-        
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        const viewDistance = 400;
-        const sphereRadius = 134;
-        
-        // 회전 각도를 라디안으로 변환
-        const rotX = (rotationX * Math.PI) / 180;
-        const rotY = (rotationY * Math.PI) / 180;
-        const rotZ = (rotationZ * Math.PI) / 180;
-        
-        // 위도선 그리기 (수평 원들) - 가운데만
-        const lat = 0; // 적도 (가운데)
-        const points = [];
-
-        // 각 위도선의 점들 생성
-        const pointCount = 60;
-        for (let j = 0; j < pointCount; j++) {
-            const lon = (j / pointCount) * Math.PI * 2; // 0 ~ 2π
+    // 구체 클래스
+    class GachaSphere {
+        constructor(index) {
+            this.index = index;
+            this.canvas = document.createElement('canvas');
+            this.canvas.className = 'sphere';
+            this.canvas.id = `gachaSphere${index}`;
+            container.appendChild(this.canvas);
             
-            // 구면 좌표를 3D 직교 좌표로 변환
-            const px = sphereRadius * Math.cos(lat) * Math.cos(lon);
-            const py = sphereRadius * Math.sin(lat);
-            const pz = sphereRadius * Math.cos(lat) * Math.sin(lon);
+            this.ctx = this.canvas.getContext('2d');
+            this.canvas.width = sphereSize;
+            this.canvas.height = sphereSize;
+            this.canvas.style.width = `${sphereSize}px`;
+            this.canvas.style.height = `${sphereSize}px`;
             
-            // 회전 적용
-            const rotated = rotate3D(px, py, pz, rotX, rotY, rotZ);
+            // 각 구체마다 다른 시작 위치와 속도
+            const startXPositions = [0.40, 0.60, 0.80]; // 화면의 40%, 60%, 80% 위치
+            this.x = window.innerWidth * startXPositions[index % startXPositions.length];
+            this.y = -100 - (index * 300); // 시간차를 두고 떨어지도록 (더 큰 간격)
+            this.vx = (Math.random() - 0.5) * 2;
+            this.vy = 0;
+            this.rotationX = 0;
+            this.rotationY = 0;
+            this.rotationZ = 0;
             
-            // 투영
-            const projected = project3D(rotated.x, rotated.y, rotated.z, centerX, centerY, viewDistance);
-            points.push({ ...projected, z: rotated.z });
+            // 클릭 이벤트
+            this.canvas.addEventListener('click', () => {
+                document.body.style.transition = 'opacity 0.5s ease-out';
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.href = 'work1/index.html';
+                }, 500);
+            });
+            
+            // 마우스 호버 시 약간의 상승 효과
+            this.canvas.addEventListener('mouseenter', () => {
+                this.vy -= 2;
+            });
         }
         
-        // 선 그리기 (모두 실선)
-        ctx.beginPath();
-        ctx.setLineDash([]);
-        ctx.globalAlpha = 1;
-        for (let k = 0; k < points.length; k++) {
-            const p = points[k];
-            if (k === 0) {
-                ctx.moveTo(p.x, p.y);
-            } else {
-                ctx.lineTo(p.x, p.y);
-            }
-        }
-        ctx.closePath();
-        ctx.stroke();
+        drawSphere() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.strokeStyle = '#000000';
+            this.ctx.lineWidth = 2;
             
-        // 경도선 그리기 (수직 원들)
-        const longitudeCount = 4;
-        for (let i = 0; i < longitudeCount; i++) {
-            const lon = (i / longitudeCount) * Math.PI * 2;
+            const centerX = this.canvas.width / 2;
+            const centerY = this.canvas.height / 2;
+            const viewDistance = 400;
+            const sphereRadius = 134;
+            
+            // 회전 각도를 라디안으로 변환
+            const rotX = (this.rotationX * Math.PI) / 180;
+            const rotY = (this.rotationY * Math.PI) / 180;
+            const rotZ = (this.rotationZ * Math.PI) / 180;
+            
+            // 위도선 그리기 (수평 원들) - 가운데만
+            const lat = 0;
             const points = [];
-            
-            // 각 경도선의 점들 생성
+
             const pointCount = 60;
             for (let j = 0; j < pointCount; j++) {
-                const lat = (j / pointCount - 0.5) * Math.PI;
-            
-                // 구면 좌표를 3D 직교 좌표로 변환
+                const lon = (j / pointCount) * Math.PI * 2;
+                
                 const px = sphereRadius * Math.cos(lat) * Math.cos(lon);
                 const py = sphereRadius * Math.sin(lat);
                 const pz = sphereRadius * Math.cos(lat) * Math.sin(lon);
                 
-                // 회전 적용
                 const rotated = rotate3D(px, py, pz, rotX, rotY, rotZ);
-                
-                // 투영
                 const projected = project3D(rotated.x, rotated.y, rotated.z, centerX, centerY, viewDistance);
                 points.push({ ...projected, z: rotated.z });
             }
             
-            // 선 그리기 (모두 실선)
-            ctx.beginPath();
-            ctx.setLineDash([]);
-            ctx.globalAlpha = 1;
+            this.ctx.beginPath();
+            this.ctx.setLineDash([]);
+            this.ctx.globalAlpha = 1;
             for (let k = 0; k < points.length; k++) {
                 const p = points[k];
                 if (k === 0) {
-                    ctx.moveTo(p.x, p.y);
+                    this.ctx.moveTo(p.x, p.y);
                 } else {
-                    ctx.lineTo(p.x, p.y);
+                    this.ctx.lineTo(p.x, p.y);
                 }
             }
-            ctx.stroke();
-        }
-        
-        // 중앙 링 그리기 (적도)
-        const ringPoints = [];
-        const ringPointCount = 120;
-        for (let i = 0; i < ringPointCount; i++) {
-            const angle = (i / ringPointCount) * Math.PI * 2;
-            const px = sphereRadius * Math.cos(angle);
-            const py = 0;
-            const pz = sphereRadius * Math.sin(angle);
-            
-            const rotated = rotate3D(px, py, pz, rotX, rotY, rotZ);
-            const projected = project3D(rotated.x, rotated.y, rotated.z, centerX, centerY, viewDistance);
-            ringPoints.push({ ...projected, z: rotated.z });
-        }
-        
-        ctx.beginPath();
-        ctx.lineWidth = 2.5;
-        ctx.setLineDash([]);
-        ctx.globalAlpha = 1;
-        for (let k = 0; k < ringPoints.length; k++) {
-            const p = ringPoints[k];
-            if (k === 0) {
-                ctx.moveTo(p.x, p.y);
-            } else {
-                ctx.lineTo(p.x, p.y);
+            this.ctx.closePath();
+            this.ctx.stroke();
+                
+            // 경도선 그리기 (수직 원들)
+            const longitudeCount = 4;
+            for (let i = 0; i < longitudeCount; i++) {
+                const lon = (i / longitudeCount) * Math.PI * 2;
+                const points = [];
+                
+                const pointCount = 60;
+                for (let j = 0; j < pointCount; j++) {
+                    const lat = (j / pointCount - 0.5) * Math.PI;
+                
+                    const px = sphereRadius * Math.cos(lat) * Math.cos(lon);
+                    const py = sphereRadius * Math.sin(lat);
+                    const pz = sphereRadius * Math.cos(lat) * Math.sin(lon);
+                    
+                    const rotated = rotate3D(px, py, pz, rotX, rotY, rotZ);
+                    const projected = project3D(rotated.x, rotated.y, rotated.z, centerX, centerY, viewDistance);
+                    points.push({ ...projected, z: rotated.z });
+                }
+                
+                this.ctx.beginPath();
+                this.ctx.setLineDash([]);
+                this.ctx.globalAlpha = 1;
+                for (let k = 0; k < points.length; k++) {
+                    const p = points[k];
+                    if (k === 0) {
+                        this.ctx.moveTo(p.x, p.y);
+                    } else {
+                        this.ctx.lineTo(p.x, p.y);
+                    }
+                }
+                this.ctx.stroke();
             }
-        }
-        ctx.closePath();
-        ctx.stroke();
+            
+            // 중앙 링 그리기 (적도)
+            const ringPoints = [];
+            const ringPointCount = 120;
+            for (let i = 0; i < ringPointCount; i++) {
+                const angle = (i / ringPointCount) * Math.PI * 2;
+                const px = sphereRadius * Math.cos(angle);
+                const py = 0;
+                const pz = sphereRadius * Math.sin(angle);
+                
+                const rotated = rotate3D(px, py, pz, rotX, rotY, rotZ);
+                const projected = project3D(rotated.x, rotated.y, rotated.z, centerX, centerY, viewDistance);
+                ringPoints.push({ ...projected, z: rotated.z });
+            }
+            
+            this.ctx.beginPath();
+            this.ctx.lineWidth = 2.5;
+            this.ctx.setLineDash([]);
+            this.ctx.globalAlpha = 1;
+            for (let k = 0; k < ringPoints.length; k++) {
+                const p = ringPoints[k];
+                if (k === 0) {
+                    this.ctx.moveTo(p.x, p.y);
+                } else {
+                    this.ctx.lineTo(p.x, p.y);
+                }
+            }
+            this.ctx.closePath();
+            this.ctx.stroke();
 
-        // 구체의 외곽 원형 테두리 (항상 보이는 원)
-        // 구체의 반지름만큼의 원을 항상 그림 (회전에 상관없이)
-        const outlinePointCount = 180;
-        const outlineRadius = sphereRadius;
-        
-        // 투영된 반지름 계산 (구체가 회전해도 반지름은 동일)
-        const projectedRadius = (viewDistance / (viewDistance + 0)) * outlineRadius;
-        
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, projectedRadius, 0, Math.PI * 2);
-        ctx.lineWidth = 2.5;
-        ctx.setLineDash([]);
-        ctx.globalAlpha = 1;
-        ctx.strokeStyle = '#000000';
-        ctx.stroke();
-        
-        // 스타일 리셋
-        ctx.setLineDash([]);
-        ctx.globalAlpha = 1;
-        ctx.lineWidth = 2;
-    }
-    
-    // 애니메이션 함수
-    function animate() {
-        // 중력 적용
-        vy += gravity;
-        
-        // 위치 업데이트
-        x += vx;
-        y += vy;
-        
-        // 회전 효과
-        rotationX += vy * 0.5;
-        rotationY += vx * 0.5;
-        rotationZ += (vx + vy) * 0.3;
-        
-        // 바닥 충돌 감지 (바닥을 조금 위로)
-        const floorHeight = window.innerHeight + 8;
-        if (y + radius >= floorHeight) {
-            y = floorHeight - radius;
-            vy = -vy * bounce;
-            vx *= friction;
+            // 구체의 외곽 원형 테두리
+            const outlineRadius = sphereRadius;
+            const projectedRadius = (viewDistance / (viewDistance + 0)) * outlineRadius;
             
-            if (Math.abs(vy) < minVelocity) {
-                vy = 0;
-            }
+            this.ctx.beginPath();
+            this.ctx.arc(centerX, centerY, projectedRadius, 0, Math.PI * 2);
+            this.ctx.lineWidth = 2.5;
+            this.ctx.setLineDash([]);
+            this.ctx.globalAlpha = 1;
+            this.ctx.strokeStyle = '#000000';
+            this.ctx.stroke();
+            
+            // 스타일 리셋
+            this.ctx.setLineDash([]);
+            this.ctx.globalAlpha = 1;
+            this.ctx.lineWidth = 2;
         }
         
-        // 좌우 벽 충돌 감지
-        if (x - radius <= 0) {
-            x = radius;
-            vx = -vx * bounce;
-        } else if (x + radius >= window.innerWidth) {
-            x = window.innerWidth - radius;
-            vx = -vx * bounce;
-        }
-        
-        // 천장 충돌 감지
-        if (y - radius <= 0) {
-            y = radius;
-            vy = -vy * bounce;
+        animate() {
+            // 중력 적용
+            this.vy += gravity;
+            
+            // 위치 업데이트
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            // 회전 효과
+            this.rotationX += this.vy * 0.5;
+            this.rotationY += this.vx * 0.5;
+            this.rotationZ += (this.vx + this.vy) * 0.3;
+            
+            // 바닥 충돌 감지
+            const floorHeight = window.innerHeight + 8;
+            if (this.y + radius >= floorHeight) {
+                this.y = floorHeight - radius;
+                this.vy = -this.vy * bounce;
+                this.vx *= friction;
+                
+                if (Math.abs(this.vy) < minVelocity) {
+                    this.vy = 0;
                 }
-        
-        // 구체 위치 적용
-        canvas.style.left = `${x - radius}px`;
-        canvas.style.top = `${y - radius}px`;
-        
-        // 구체 그리기
-        drawSphere();
-        
-        // 계속 애니메이션
-        requestAnimationFrame(animate);
+            }
+            
+            // 좌우 벽 충돌 감지
+            if (this.x - radius <= 0) {
+                this.x = radius;
+                this.vx = -this.vx * bounce;
+            } else if (this.x + radius >= window.innerWidth) {
+                this.x = window.innerWidth - radius;
+                this.vx = -this.vx * bounce;
+            }
+            
+            // 천장 충돌 감지
+            if (this.y - radius <= 0) {
+                this.y = radius;
+                this.vy = -this.vy * bounce;
+            }
+            
+            // 구체 위치 적용
+            this.canvas.style.left = `${this.x - radius}px`;
+            this.canvas.style.top = `${this.y - radius}px`;
+            
+            // 구체 그리기
+            this.drawSphere();
+        }
     }
     
-    // 애니메이션 시작
-    animate();
+    // 구체들 생성
+    const spheres = [];
+    for (let i = 0; i < numSpheres; i++) {
+        spheres.push(new GachaSphere(i));
+    }
     
-    // 클릭 이벤트
-    canvas.addEventListener('click', function() {
-        // 페이드아웃 효과
-        document.body.style.transition = 'opacity 0.5s ease-out';
-        document.body.style.opacity = '0';
-        
-        // 페이드아웃 후 페이지 이동
-        setTimeout(function() {
-            window.location.href = 'work1/index.html';
-        }, 500);
-    });
+    // 각 구체마다 독립적인 애니메이션 루프 (시간차를 두고 시작)
+    function startSphereAnimation(sphere, delay) {
+        setTimeout(() => {
+            function animate() {
+                sphere.animate();
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }, delay);
+    }
     
-    // 마우스 호버 시 약간의 상승 효과
-    canvas.addEventListener('mouseenter', function() {
-        vy -= 2;
+    // 각 구체를 시간차를 두고 애니메이션 시작
+    spheres.forEach((sphere, index) => {
+        startSphereAnimation(sphere, index * 500); // 0.5초씩 차이
     });
     
     // 윈도우 리사이즈 시 위치 조정
     window.addEventListener('resize', function() {
-        if (x < 0 || x > window.innerWidth) {
-            x = window.innerWidth / 2;
-        }
-        if (y < 0 || y > window.innerHeight) {
-            y = window.innerHeight / 2;
-        }
-        // 바닥선 위치 업데이트
+        spheres.forEach((sphere, index) => {
+            const startXPositions = [0.40, 0.60, 0.80];
+            if (sphere.x < 0 || sphere.x > window.innerWidth) {
+                sphere.x = window.innerWidth * startXPositions[index % startXPositions.length];
+            }
+            if (sphere.y < 0 || sphere.y > window.innerHeight) {
+                sphere.y = window.innerHeight / 2;
+            }
+        });
         updateFloorLine();
     });
     
@@ -347,10 +347,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // 페이지 로드 시 썸네일 활성화 상태 확인
     checkWorksViewed();
     
+    
     // 스토리지 변경 감지 (다른 탭에서 방문한 경우)
     window.addEventListener('storage', function(e) {
         if (e.key === 'viewedWorks') {
             checkWorksViewed();
         }
     });
+    
+    // WORKS 텍스트 클릭 시 스크롤을 맨 아래로 이동 (ease-in-out)
+    const worksText = document.getElementById('worksText');
+    if (worksText) {
+        worksText.addEventListener('click', function() {
+            const targetScroll = document.documentElement.scrollHeight;
+            const startScroll = window.pageYOffset || document.documentElement.scrollTop;
+            const distance = targetScroll - startScroll;
+            const duration = 2500; // 1.5초
+            let start = null;
+            
+            function easeInOut(t) {
+                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            }
+            
+            function animateScroll(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                const progressRatio = Math.min(progress / duration, 1);
+                const ease = easeInOut(progressRatio);
+                
+                window.scrollTo(0, startScroll + distance * ease);
+                
+                if (progress < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            }
+            
+            requestAnimationFrame(animateScroll);
+        });
+    }
 });
